@@ -1,0 +1,63 @@
+<ol class="breadcrumb">
+	<li><a href="<?php echo BASE_URL ?>go/shop">Все товары</a></li>
+	<? if($item ->server): ?>
+	<li><a href="<?php echo BASE_URL ?>go/shop/<?= $server->url ?>"><?= $server->name ?></a></li>
+	<li><a href="<?php echo BASE_URL ?>go/shop/<?= $server->url ?>/<?= $cat->url ?>"><?= $cat->name ?></a></li>
+	<?endif?>
+	<li class="active"><?= $item->title ?></li>
+</ol>
+<div class="form-block">
+	<div class="block-header">
+		<div class="row">
+			<div class="col-md-3">
+				<?=$item->title?>
+			</div>
+			<div class="col-md-9">
+				<div class="pull-right"><?=(($item->discount == 0)?$item->price:"<s>{$item->price}</s> <b style=\"color:red\">" . (float) ($item->price - $item->discount) .  "</b>") . (($item->realprice)?$donate['currency_donate']:$donate['currency_ingame'])?></div>
+				<!-- Тут что-то может быть, например, категория -->
+			</div>
+		</div>
+	</div>
+	<div class="block-line"></div>
+	<div class="tab-pane" id="launcher">
+		<div class="row">
+			<div class="col-md-3" align="center">
+				<img src="<?=$item->pic?>" width="80%" alt="<?=$item->title?>"></a>
+				<p><?=(($item->discount == 0)?$item->price:"<s>{$item->price}</s> <b style=\"color:red\">" . (float) ($item->price - $item->discount) .  "</b>") . (($item->realprice)?$donate['currency_donate']:$donate['currency_ingame'])?></p>
+				<?if($item->discount and $item->num):?><p>Осталось по акции: <?=$item->num?></p><?endif?>
+			</div>
+			<div class="col-md-9">
+				<?=Message::BBDecode(nl2br(TextBase::HTMLDestruct($item->description)))?>
+				<?if($user and $user->lvl() > 1):?>
+				<form name="its" method="post" class="form-inline">
+					<script language="JavaScript" type="text/javascript">
+						function Items(){
+							var form=document.its;
+							result = Summ(form.amount.value);
+							if(result <= <?=($item->realprice)?$user->getMoney():$user->getEcon()?>){
+								form.submit.disabled = false;
+								return form.submit.value="Купить (" + result + "<?=($item->realprice)?$donate['currency_donate']:$donate['currency_ingame']?>)";
+							} else {
+								form.submit.disabled = true;
+								return form.submit.value="Купить (Слишком дорого!)";
+							}
+						}
+						function Summ(count) {
+							if(<?=$item->discount?> && <?=$item->num?> <= count && <?=$item->num?> != 0) {
+								return <?=$item->num?>*(<?=$item->price?> - <?=$item->discount?>) + (count - <?=$item->num?>) * <?=$item->price?>;
+							} else return <?=$item->price - $item->discount?> * count;
+						}
+					</script>
+					<input type="number" class="form-control" name="amount" placeholder="Введите количество" onchange="Items();" onclick="Items();" onkeyup="Items();" onkeypress="Items();">
+					<?if($item->server==0):?>
+						<select name="server" class="form-control">
+							<?=$servers_select?>
+						</select>
+					<?endif?>
+					<input type="submit" class="btn btn-primary" name="submit" value="Купить (0<?=($item->realprice)?$donate['currency_donate']:$donate['currency_ingame']?>)">
+				</form>
+				<?endif?>
+			</div>
+		</div>
+	</div>
+</div>

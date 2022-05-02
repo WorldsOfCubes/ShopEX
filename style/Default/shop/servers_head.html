@@ -1,0 +1,15 @@
+<ol class="breadcrumb">
+	<li class="active">Все товары</li>
+</ol>
+<div class="form-block">
+
+	<div class="block-header">Выбор сервера</div>
+
+	<div class="block-line"></div>
+	Выберите сервер по вкусу
+	<?if($user and $user->lvl()>=15):?>
+		<div class="pull-right">
+			<a href="<?php echo BASE_URL ?>go/shop/server_add"><i class="glyphicon glyphicon-plus"></i> Добавить сервер</a>
+		</div>
+	<?endif?>
+</div>

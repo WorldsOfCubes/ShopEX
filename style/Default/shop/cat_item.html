@@ -1,0 +1,33 @@
+	<tr id="cat-<?=$temp['id']?>"><td><?=$temp['priority']?></td><td><?=$temp['title']?></td><td><?=$temp['description']?></td><td><?php echo BASE_URL ?>go/shop/server_url/<?=$temp['url']?></td>
+		<td>
+			<div class="btn-group btn-group-xs">
+				<button class="btn btn-warning" data-toggle="modal" data-target="#modal_cat_edit_<?=$temp['id']?>"><i class="glyphicon glyphicon-pencil"></i></button>
+				<button class="btn btn-danger" onclick="RemoveCat('<?=$temp['id']?>');"><i class="glyphicon glyphicon-remove"></i></button>
+			</div>
+			<div class="modal fade" id="modal_cat_edit_<?=$temp['id']?>" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Редактирование категории</h4>
+						</div>
+						<div class="modal-body" align="center">
+							<div style="display: none;" id="main-error-<?=$temp['id']?>"><div class="alert alert-danger" id="main-error-text-<?=$temp['id']?>"></div></div>
+							<form action="<?php echo BASE_URL ?>instruments/shop_mod/shop_action.php?method=cat_edit" method="POST" class="form-horizontal" autocomplete="off" enctype="multipart/form-data" id="cat-<?=$temp['id']?>-update" onsubmit="UpdateCat(<?=$temp['id']?>); return false">
+								<input type="hidden" name="id" value="<?=$temp['id']?>">
+								<input type="text" name="title" class="form-control spp" style="margin-top: 5px" title="Название категории" data-trigger="focus" data-content="Как будет назваться категория" data-placement="bottom" placeholder="Название" value="<?=$temp['title']?>">
+								<input type="text" name="description" class="form-control spp" style="margin-top: 5px" title="Краткое описание" data-trigger="focus" data-content="Описание категории, буквально в двух словах. Можно оставить пустым." data-placement="bottom" placeholder="Описание" value="<?=$temp['description']?>">
+								<input type="text" name="url" class="form-control spp" style="margin-top: 5px" title="URL категории" data-trigger="focus" data-content="<?php echo BASE_URL ?>go/shop/server_url/cat_url" data-placement="bottom" placeholder="url" value="<?=$temp['url']?>">
+								<input type="number" name="priority" class="form-control spp" style="margin-top: 5px" title="Приоритет" data-trigger="focus" data-content="Чем больше тем раньше категория в списке." data-placement="bottom" placeholder="Приоритет" value="<?=$temp['priority']?>">
+								<input id="cat-<?=$temp['id']?>-button" class="btn btn-primary btn-block" style="margin-top: 5px" type="submit" onclick="UpdateCat(<?=$temp['id']?>); return false" value="Изменить" />
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Закрыть</button>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>

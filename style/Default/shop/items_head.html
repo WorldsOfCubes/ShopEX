@@ -1,0 +1,30 @@
+<?if($cat_from_get == 'all'):?>
+	<ol class="breadcrumb">
+		<li><a href="<?php echo BASE_URL ?>go/shop">Все товары</a></li>
+		<li class="active"><?=$server->name?></li>
+	</ol>
+<?else:?>
+	<ol class="breadcrumb">
+		<li><a href="<?php echo BASE_URL ?>go/shop">Все товары</a></li>
+		<li><a href="<?php echo BASE_URL ?>go/shop/<?=$server->url?>"><?=$server->name?></a></li>
+		<li class="active"><?=$cat->name?></li>
+	</ol>
+<?endif?>
+<div class="form-block">
+
+	<div class="block-header"><?=$server->name?></div>
+
+	<div class="block-line"></div>
+	<p><?=$server->description?></p>
+	<hr />
+	<?if($user and $user->lvl()>=15):?>
+		<div class="pull-right">
+			<a href="<?php echo BASE_URL ?>go/shop/item_add"><i class="glyphicon glyphicon-plus"></i> Добавить предмет</a>
+		</div>
+	<?endif?>
+	<p>Выберите предмет, который будете покупать</p>
+</div>
+<ul class="nav nav-pills" style="margin-top: 10px;">
+	<?=$cats?>
+
+</ul>

@@ -1,0 +1,30 @@
+<div class="col-md-3">
+	<div class="panel panel-default" style="border-radius: 0px;margin-top:10px;">
+		<div class="panel-heading">
+			<h3 class="panel-title"><?=$item['title']?></h3>
+		</div>
+		<div class="panel-body">
+			<div style="text-align: center;">
+				<a href="<?php echo BASE_URL ?>go/shop/buy/<?=$item['id']?>">
+					<img src="<?=$item['pic']?>" style="max-width: 100%" />
+				</a>
+				<p><?=(($item['discount'] == 0)?$item['price']:"<s>{$item['price']}</s> <b style=\"color:red\">" . (float) ($item['price'] - $item['discount']) .  "</b>") . (($item['realprice'])?$donate['currency_donate']:$donate['currency_ingame'])?></p>
+				<div class="btn-group" style="margin-top: 10px" align="left">
+					<a href="<?php echo BASE_URL ?>go/shop/buy/<?=$item['id']?>" class="btn btn-default">
+						<i class="glyphicon glyphicon-shopping-cart"></i>
+					</a>
+
+					<?if($user and $user->lvl()>=15):?>
+						<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							<span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" role="menu">
+							<li><a href="<?php echo BASE_URL ?>go/shop/item_edit/<?=$item['id']?>"><i class="glyphicon glyphicon-pencil"></i> Редактиовать</a></li>
+							<li><a href="<?php echo BASE_URL ?>go/shop/<?=$server->url?>/?delitem=<?=$item['id']?>"><i class="glyphicon glyphicon-remove"></i> Удалить</a></li>
+						</ul>
+					<?endif?>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

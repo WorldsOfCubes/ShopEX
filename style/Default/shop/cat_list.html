@@ -1,0 +1,36 @@
+<div class="form-block">
+
+	<script src="<?php View::URL('shop/js/ajax.js') ?>"></script>
+	<div class="block-header">Редактирование категорий</div>
+
+	<div class="block-line"></div>
+	Выберите или добавьте ключ
+</div>
+<table class="table table-hover">
+	<tr><th>Приоритет</th><th>Название</th><th>Описание</th><th>url</th><th>Действия</th></tr>
+	<?=$cat_list?>
+</table>
+<button class="btn btn-success" data-toggle="modal" data-target="#modal_cat_edit_new"><i class="glyphicon glyphicon-plus"></i> Добавить</button>
+<div class="modal fade" id="modal_cat_edit_new" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Добавление категории</h4>
+			</div>
+			<div class="modal-body" align="center">
+				<div style="display: none;" id="main-error-new"><div class="alert alert-danger" id="main-error-text-new"></div></div>
+				<form action="<?php echo BASE_URL ?>instruments/shop_mod/shop_action.php?method=cat_edit" method="POST" class="form-horizontal" autocomplete="off" enctype="multipart/form-data" id="cat-new-update" onsubmit="UpdateCat('new'); return false">
+					<input type="text" name="title" class="form-control spp" style="margin-top: 5px" title="Название категории" data-trigger="focus" data-content="Как будет назваться категория" data-placement="bottom" placeholder="Название" value="<?=$temp['title']?>">
+					<input type="text" name="description" class="form-control spp" style="margin-top: 5px" title="Краткое описание" data-trigger="focus" data-content="Описание категории, буквально в двух словах. Можно оставить пустым." data-placement="bottom" placeholder="Описание" value="<?=$temp['description']?>">
+					<input type="text" name="url" class="form-control spp" style="margin-top: 5px" title="URL категории" data-trigger="focus" data-content="<?php echo BASE_URL ?>go/shop/server_url/cat_url" data-placement="bottom" placeholder="url" value="<?=$temp['url']?>">
+					<input type="number" name="priority" class="form-control spp" style="margin-top: 5px" title="Приоритет" data-trigger="focus" data-content="Чем больше тем раньше категория в списке." data-placement="bottom" placeholder="Приоритет" value="<?=$temp['priority']?>">
+					<input id="cat-new-button" class="btn btn-primary btn-block" style="margin-top: 5px" type="submit" onclick="UpdateCat('new'); return false" value="Изменить" />
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Закрыть</button>
+			</div>
+		</div>
+	</div>
+</div>

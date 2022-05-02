@@ -1,0 +1,43 @@
+<div class="form-block">
+
+	<script src="<?php View::URL('shop/js/ajax.js') ?>"></script>
+	<div class="block-header">Редактирование подарочных ключей</div>
+
+	<div class="block-line"></div>
+	Выберите или добавьте ключ
+</div>
+<table class="table table-hover">
+	<tr><th>Ключ</th><th>Сумма</th><th>Осталось активаций</th><th>Действия</th></tr>
+	<?=$key_list?>
+</table>
+<button class="btn btn-success" data-toggle="modal" data-target="#modal_key_edit_new"><i class="glyphicon glyphicon-plus"></i> Добавить</button>
+<div class="modal fade" id="modal_key_edit_new" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<h4 class="modal-title" id="myModalLabel">Добавление ключа</h4>
+			</div>
+			<div class="modal-body" align="center">
+				<div style="display: none;" id="main-error-new"><div class="alert alert-danger" id="main-error-text-new">Вы не авторизованы</div></div>
+				<form action="<?php echo BASE_URL ?>instruments/shop_mod/shop_action.php?method=key_edit" method="POST" class="form-horizontal" autocomplete="off" enctype="multipart/form-data" id="key-new-update" onsubmit="UpdateKey('new'); return false">
+					<div class="input-group">
+						<input type="text" name="key" class="form-control spp" title="Ключ" data-trigger="focus" data-content="Ключ, который и активируют игроки. Должен состоять из 4 секций по 5 заглавных латинских букв или цифр" data-placement="bottom" placeholder="Подарочный ключ" id="kf-new">
+									<span class="input-group-btn">
+										<button class="btn btn-default" type="button" onclick="GenerateKey('new');"><i class="glyphicon glyphicon-refresh"></i></button>
+									</span>
+					</div>
+					<input type="text" name="amount" class="form-control spp" style="margin-top: 5px" title="Количество возможных активаций" data-trigger="focus" data-content="Столько раз еще может быть активирован ключ." data-placement="bottom" placeholder="Кол-во активаций">
+					<input type="text" name="price" class="form-control spp" style="margin-top: 5px" title="Цена" data-trigger="focus" data-content="Столько будет начислено при активации" data-placement="bottom" placeholder="Цена">
+					<label class="checkbox">
+						<input type="checkbox" name="realprice" value="1"> На донат-счет
+					</label>
+					<input id="key-new-button" class="btn btn-primary btn-block" style="margin-top: 5px" type="submit" onclick="UpdateKey('new'); return false" value="Изменить" />
+				</form>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Закрыть</button>
+			</div>
+		</div>
+	</div>
+</div>

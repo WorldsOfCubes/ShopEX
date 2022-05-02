@@ -1,0 +1,8 @@
+<div style='margin: 15px 0 0 0;' class='well well-small' align="center">
+	<h2>Ни одного сервера не добавлено</h2>
+	<?if($user and $user->lvl()>=15):?>
+		<p>
+			<a href="<?php echo BASE_URL ?>go/shop/server_add"><i class="glyphicon glyphicon-plus"></i> Добавить сервер</a>
+		</p>
+	<?endif?>
+</div>

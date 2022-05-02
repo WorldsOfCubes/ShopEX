@@ -1,0 +1,18 @@
+<div class="form-block">
+
+	<div class="block-header"><?=$what?> сервер</div>
+
+	<div class="block-line"></div>
+
+	<form method="post" class="form-horizontal" style="text-align: center;">
+
+		<p><input type="text" name="name" class="form-control spp" title="Название сервера" data-trigger="focus" data-content="Название сервера или даже группы одинаковых серверов" data-placement="bottom" placeholder="Название" value="<?=$name?>">
+		<p><input type="text" name="url" class="form-control spp" title="URL сервера" data-trigger="focus" data-content="Будет отображаться как <?php echo BASE_URL ?>go/shop/url_servera/" data-placement="bottom" placeholder="url" value="<?=$url?>">
+		<p><input type="text" name="pic" class="form-control spp" title="url картинки" data-trigger="focus" data-content="Укажите url некого логотипа сервера" data-placement="bottom" placeholder="Картинка сервера" value="<?=$pic?>">
+		<p><input type="text" name="description" class="form-control spp" title="Краткое описание сервера" data-trigger="focus" data-content="Оставьте краткое описание сервера, буквально в одну строчку." data-placement="bottom" placeholder="Краткое описание" value="<?=$description?>">
+			<input type="hidden" name="submit" value="1"><div class="pull-right">
+			<input id="message-button" class="btn btn-default" type="submit" value="<?=$what?>" />
+
+		</div>
+	</form>
+</div>

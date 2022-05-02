@@ -1,0 +1,40 @@
+	<tr id="key-<?=$temp['key']?>"><td><?=$temp['key']?></td><td><?=$temp['price'] . (($temp['realprice'])?$donate['currency_donate']:$donate['currency_ingame'])?></td><td><?=$temp['amount']?></td>
+		<td>
+			<div class="btn-group btn-group-xs">
+				<button class="btn btn-warning" data-toggle="modal" data-target="#modal_key_edit_<?=$temp['id']?>"><i class="glyphicon glyphicon-pencil"></i></button>
+				<button class="btn btn-danger" onclick="RemoveKey('<?=$temp['key']?>');"><i class="glyphicon glyphicon-remove"></i></button>
+			</div>
+			<div class="modal fade" id="modal_key_edit_<?=$temp['id']?>" tabindex="-1" role="dialog" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+							<h4 class="modal-title" id="myModalLabel">Редактирование ключа</h4>
+						</div>
+						<div class="modal-body" align="center">
+							<div style="display: none;" id="main-error-<?=$temp['id']?>"><div class="alert alert-danger" id="main-error-text-<?=$temp['id']?>">Вы не авторизованы</div></div>
+							<form action="<?php echo BASE_URL ?>instruments/shop_mod/shop_action.php?method=key_edit" method="POST" class="form-horizontal" autocomplete="off" enctype="multipart/form-data" id="key-<?=$temp['id']?>-update" onsubmit="UpdateKey(<?=$temp['id']?>); return false">
+								<div class="input-group">
+									<input type="text" readonly class="form-control spp" value="<?=$temp['key']?>" title="Ключ" data-trigger="focus" data-content="Ключ, который и активируют игроки. Должен состоять из 4 секций по 5 заглавных латинских букв или цифр" data-placement="bottom" placeholder="Подарочный ключ" id="kf-<?=$temp['id']?>">
+									<input type="hidden" name="key" value="<?=$temp['key']?>">
+									<span class="input-group-btn">
+										<button class="btn btn-default" disabled type="button" onclick="GenerateKey(<?=$temp['id']?>);"><i class="glyphicon glyphicon-refresh"></i></button>
+									</span>
+								</div>
+								<input type="text" name="amount" class="form-control spp" style="margin-top: 5px" title="Количество возможных активаций" data-trigger="focus" data-content="Столько раз еще может быть активирован ключ." data-placement="bottom" placeholder="Кол-во активаций" value="<?=$temp['amount']?>">
+								<input type="text" name="price" class="form-control spp" style="margin-top: 5px" title="Цена" data-trigger="focus" data-content="Столько будет начислено при активации" data-placement="bottom" placeholder="Цена" value="<?=$temp['price']?>">
+								<label class="checkbox">
+									<input type="checkbox" name="realprice" value="1" <?php echo ($temp['realprice'])?'checked="checked"':'' ?>> На донат-счет
+								</label>
+								<input id="key-<?=$temp['id']?>-button" class="btn btn-primary btn-block" style="margin-top: 5px" type="submit" onclick="UpdateKey(<?=$temp['id']?>); return false" value="Изменить" />
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="glyphicon glyphicon-remove"></i> Закрыть</button>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</td>
+	</tr>
